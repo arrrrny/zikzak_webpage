@@ -616,30 +616,6 @@ body {
 }
 
 /* QR Section */
-.qr-section {
-    margin-top: 2rem;
-}
-
-.qr-code {
-    width: 120px;
-    height: 120px;
-    background: white;
-    border-radius: var(--border-radius);
-    margin: 0 auto 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.qr-placeholder i {
-    font-size: 3rem;
-    color: var(--text-secondary);
-}
-
-.qr-section p {
-    font-size: 0.875rem;
-    opacity: 0.8;
-}
 
 /* Footer */
 .footer {

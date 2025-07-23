@@ -401,10 +401,126 @@ if ("serviceWorker" in navigator) {
   });
 }
 
+// Smart Download Detection
+function initSmartDownload() {
+  const floatingBtn = document.querySelector(".floating-download-btn");
+  const downloadBtns = document.querySelectorAll(
+    ".download-btn, .download-btn-large",
+  );
+
+  if (!floatingBtn) return;
+
+  // Detect user's device
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const isAndroid = /Android/.test(navigator.userAgent);
+
+  // App store URLs
+  const iosUrl = "https://apps.apple.com/tr/app/zik-zak/id1563425450";
+  const androidUrl =
+    "https://play.google.com/store/apps/details?id=dev.zuzu.zingo";
+
+  // Update floating button based on device
+  if (isAndroid) {
+    floatingBtn.href = androidUrl;
+    floatingBtn.innerHTML = `
+      <i class="fab fa-google-play"></i>
+      <span data-en="Get on Play Store" data-tr="Play Store'dan İndir">Play Store'dan İndir</span>
+    `;
+  } else {
+    // Default to iOS (including desktop users)
+    floatingBtn.href = iosUrl;
+    floatingBtn.innerHTML = `
+      <i class="fab fa-apple"></i>
+      <span data-en="Get on App Store" data-tr="App Store'dan İndir">App Store'dan İndir</span>
+    `;
+  }
+
+  // Apply language to new content
+  const currentLanguage = localStorage.getItem("zikzak-language") || "tr";
+  const newSpan = floatingBtn.querySelector("span");
+  if (newSpan) {
+    const text = newSpan.getAttribute(`data-${currentLanguage}`);
+    if (text) {
+      newSpan.textContent = text;
+    }
+  }
+}
+
+// Download Analytics Tracking
+function trackDownload(platform, location) {
+  // Track download events for analytics
+  console.log(`Download tracked: ${platform} from ${location}`);
+
+  // Google Analytics 4 (if implemented)
+  if (typeof gtag !== "undefined") {
+    gtag("event", "download_app", {
+      platform: platform,
+      location: location,
+      app_name: "ZikZak AI",
+    });
+  }
+
+  // Alternative analytics (Plausible, etc.)
+  if (typeof plausible !== "undefined") {
+    plausible("Download", {
+      props: {
+        platform: platform,
+        location: location,
+      },
+    });
+  }
+}
+
+// Add download tracking to all download buttons
+function initDownloadTracking() {
+  // Track main download buttons
+  document
+    .querySelectorAll(".download-btn.ios, .download-btn-large.ios")
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        trackDownload("iOS", "main-buttons");
+      });
+    });
+
+  document
+    .querySelectorAll(".download-btn.android, .download-btn-large.android")
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        trackDownload("Android", "main-buttons");
+      });
+    });
+
+  // Track footer download buttons
+  document.querySelectorAll(".footer-download-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const platform = btn.href.includes("apple.com") ? "iOS" : "Android";
+      trackDownload(platform, "footer");
+    });
+  });
+
+  // Track floating download button
+  const floatingBtn = document.querySelector(".floating-download-btn");
+  if (floatingBtn) {
+    floatingBtn.addEventListener("click", () => {
+      const platform = floatingBtn.href.includes("apple.com")
+        ? "iOS"
+        : "Android";
+      trackDownload(platform, "floating-button");
+    });
+  }
+}
+
+// Initialize smart download when DOM is loaded
+document.addEventListener("DOMContentLoaded", function () {
+  initSmartDownload();
+  initDownloadTracking();
+});
+
 // Export functions for testing (if needed)
 if (typeof module !== "undefined" && module.exports) {
   module.exports = {
     setLanguage,
     simulateChat,
+    initSmartDownload,
   };
 }
