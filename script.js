@@ -88,8 +88,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Smooth scrolling for anchor links
-  const anchorLinks = document.querySelectorAll('a[href^="#"]');
+  // Smooth scrolling for anchor links (exclude download buttons)
+  const anchorLinks = document.querySelectorAll(
+    'a[href^="#"]:not(.download-btn):not(.download-btn-large):not(.footer-download-btn):not(.floating-download-btn)',
+  );
   anchorLinks.forEach((link) => {
     link.addEventListener("click", function (e) {
       e.preventDefault();
@@ -164,40 +166,47 @@ document.addEventListener("DOMContentLoaded", function () {
     observer.observe(el);
   });
 
-  // Download button analytics tracking
+  // Download button analytics tracking (lightweight - no interference)
   const downloadButtons = document.querySelectorAll(
     ".download-btn, .download-btn-large, .footer-download-btn, .floating-download-btn",
   );
 
   downloadButtons.forEach((btn) => {
-    btn.addEventListener("click", function (e) {
-      // Determine platform
-      const platform =
-        this.classList.contains("ios") || this.href.includes("apple")
-          ? "iOS"
-          : "Android";
-      const location = this.closest(".hero")
-        ? "Hero"
-        : this.closest(".download-section")
-          ? "Download Section"
-          : this.closest(".footer")
-            ? "Footer"
-            : this.classList.contains("floating-download-btn")
-              ? "Floating Button"
-              : "Unknown";
+    btn.addEventListener(
+      "click",
+      function (e) {
+        // Track analytics without interfering with navigation
+        const platform =
+          this.classList.contains("ios") || this.href.includes("apple")
+            ? "iOS"
+            : "Android";
+        const location = this.closest(".hero")
+          ? "Hero"
+          : this.closest(".download-section")
+            ? "Download Section"
+            : this.closest(".footer")
+              ? "Footer"
+              : this.classList.contains("floating-download-btn")
+                ? "Floating Button"
+                : "Unknown";
 
-      // Track download attempt
-      if (typeof gtag !== "undefined") {
-        gtag("event", "download_click", {
-          platform: platform,
-          location: location,
-          language: currentLanguage,
-        });
-      }
+        // Track download attempt (non-blocking)
+        if (typeof gtag !== "undefined") {
+          gtag("event", "download_click", {
+            platform: platform,
+            location: location,
+            language: currentLanguage,
+          });
+        }
 
-      // Allow actual download to proceed
-      // e.preventDefault(); // Removed to allow real downloads
-    });
+        // Ensure link opens in new tab
+        if (!this.target) {
+          this.target = "_blank";
+          this.rel = "noopener noreferrer";
+        }
+      },
+      { passive: true },
+    );
   });
 
   // Phone mockup interaction
@@ -468,41 +477,26 @@ function trackDownload(platform, location) {
 
 // Add download tracking to all download buttons
 function initDownloadTracking() {
-  // Track main download buttons
+  // Track main download buttons (consolidated tracking - remove duplicate listeners)
   document
-    .querySelectorAll(".download-btn.ios, .download-btn-large.ios")
+    .querySelectorAll(
+      ".download-btn, .download-btn-large, .footer-download-btn, .floating-download-btn",
+    )
     .forEach((btn) => {
+      // Remove any existing listeners to avoid conflicts
+      btn.removeEventListener("click", trackDownload);
+
       btn.addEventListener("click", () => {
-        trackDownload("iOS", "main-buttons");
+        const platform = btn.href.includes("apple.com") ? "iOS" : "Android";
+        const location = btn.classList.contains("floating-download-btn")
+          ? "floating-button"
+          : btn.classList.contains("footer-download-btn")
+            ? "footer"
+            : "main-buttons";
+
+        trackDownload(platform, location);
       });
     });
-
-  document
-    .querySelectorAll(".download-btn.android, .download-btn-large.android")
-    .forEach((btn) => {
-      btn.addEventListener("click", () => {
-        trackDownload("Android", "main-buttons");
-      });
-    });
-
-  // Track footer download buttons
-  document.querySelectorAll(".footer-download-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const platform = btn.href.includes("apple.com") ? "iOS" : "Android";
-      trackDownload(platform, "footer");
-    });
-  });
-
-  // Track floating download button
-  const floatingBtn = document.querySelector(".floating-download-btn");
-  if (floatingBtn) {
-    floatingBtn.addEventListener("click", () => {
-      const platform = floatingBtn.href.includes("apple.com")
-        ? "iOS"
-        : "Android";
-      trackDownload(platform, "floating-button");
-    });
-  }
 }
 
 // Initialize smart download when DOM is loaded
