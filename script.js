@@ -195,13 +195,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
       }
 
-      // For demo purposes, show alert instead of actual download
-      e.preventDefault();
-      const messages = {
-        en: `Download for ${platform} will be available soon! Stay tuned.`,
-        tr: `${platform} için indirme yakında kullanılabilir olacak! Takipte kalın.`,
-      };
-      alert(messages[currentLanguage]);
+      // Allow actual download to proceed
+      // e.preventDefault(); // Removed to allow real downloads
     });
   });
 
