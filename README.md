@@ -68,7 +68,7 @@ Make your feature suggestions count:
 ## 🔗 Connect With Us
 
 ### 🌐 Official Links
-- **Website**: [zik-zak.zuzu.dev](https://zuzu.dev)
+- **Website**: [zuzu.dev](https://zuzu.dev)
 - **Privacy Policy**: [Privacy Policy](https://zuzu.dev/privacy-policy/)
 - **Contact Form**: [Contact Us](https://zuzu.dev/contact/)
 
