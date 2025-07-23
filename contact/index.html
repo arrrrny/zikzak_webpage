@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="tr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ZikZak AI - İletişim | Contact</title>
+        <meta
+            name="description"
+            content="ZikZak AI ile iletişime geçin. Sorularınızı, önerilerinizi ve geri bildirimlerinizi bizimle paylaşın."
+        />
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Icons -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <!-- Styles -->
+        <link rel="stylesheet" href="../style.css" />
+
+        <style>
+            .contact-content {
+                max-width: 1000px;
+                margin: 0 auto;
+                padding: 120px 20px 60px;
+            }
+
+            .contact-header {
+                text-align: center;
+                margin-bottom: 60px;
+            }
+
+            .contact-header h1 {
+                font-size: 2.5rem;
+                font-weight: 700;
+                margin-bottom: 10px;
+                background: linear-gradient(
+                    135deg,
+                    var(--primary-color),
+                    var(--secondary-color)
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .contact-header .subtitle {
+                color: var(--text-muted);
+                font-size: 1.1rem;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .contact-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 60px;
+                align-items: start;
+            }
+
+            .contact-info {
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 20px;
+                padding: 40px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .contact-info h2 {
+                color: var(--primary-color);
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+                font-weight: 600;
+            }
+
+            .contact-item {
+                display: flex;
+                align-items: flex-start;
+                gap: 20px;
+                margin-bottom: 30px;
+            }
+
+            .contact-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 50px;
+                height: 50px;
+                background: linear-gradient(
+                    135deg,
+                    var(--primary-color),
+                    var(--secondary-color)
+                );
+                border-radius: 15px;
+                color: white;
+                font-size: 1.2rem;
+                flex-shrink: 0;
+            }
+
+            .contact-details h3 {
+                color: var(--text-color);
+                font-size: 1.1rem;
+                font-weight: 600;
+                margin-bottom: 5px;
+            }
+
+            .contact-details p {
+                color: var(--text-muted);
+                margin: 0;
+                line-height: 1.6;
+            }
+
+            .contact-details a {
+                color: var(--primary-color);
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+            .contact-details a:hover {
+                color: var(--secondary-color);
+            }
+
+            .contact-form {
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 20px;
+                padding: 40px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .contact-form h2 {
+                color: var(--primary-color);
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+                font-weight: 600;
+            }
+
+            .form-group {
+                margin-bottom: 25px;
+            }
+
+            .form-group label {
+                display: block;
+                color: var(--text-color);
+                font-weight: 500;
+                margin-bottom: 8px;
+            }
+
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                width: 100%;
+                padding: 15px 20px;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 12px;
+                color: var(--text-color);
+                font-size: 1rem;
+                transition: all 0.3s ease;
+                resize: vertical;
+            }
+
+            .form-group input:focus,
+            .form-group textarea:focus,
+            .form-group select:focus {
+                outline: none;
+                border-color: var(--primary-color);
+                background: rgba(255, 255, 255, 0.15);
+                box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.1);
+            }
+
+            .form-group textarea {
+                min-height: 120px;
+                font-family: inherit;
+            }
+
+            .form-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+
+            .submit-btn {
+                background: linear-gradient(
+                    135deg,
+                    var(--primary-color),
+                    var(--secondary-color)
+                );
+                color: white;
+                border: none;
+                padding: 15px 40px;
+                border-radius: 12px;
+                font-size: 1.1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .submit-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(var(--primary-color-rgb), 0.3);
+            }
+
+            .submit-btn:disabled {
+                opacity: 0.7;
+                cursor: not-allowed;
+                transform: none;
+            }
+
+            .back-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                color: var(--primary-color);
+                text-decoration: none;
+                font-weight: 500;
+                margin-bottom: 30px;
+                transition: all 0.3s ease;
+            }
+
+            .back-link:hover {
+                gap: 12px;
+                color: var(--secondary-color);
+            }
+
+            .success-message {
+                background: linear-gradient(135deg, #4ade80, #22c55e);
+                color: white;
+                padding: 20px;
+                border-radius: 12px;
+                margin-bottom: 20px;
+                text-align: center;
+                font-weight: 500;
+                display: none;
+            }
+
+            .error-message {
+                background: linear-gradient(135deg, #ef4444, #dc2626);
+                color: white;
+                padding: 20px;
+                border-radius: 12px;
+                margin-bottom: 20px;
+                text-align: center;
+                font-weight: 500;
+                display: none;
+            }
+
+            @media (max-width: 768px) {
+                .contact-content {
+                    padding: 100px 15px 40px;
+                }
+
+                .contact-header h1 {
+                    font-size: 2rem;
+                }
+
+                .contact-grid {
+                    grid-template-columns: 1fr;
+                    gap: 40px;
+                }
+
+                .contact-info,
+                .contact-form {
+                    padding: 30px 20px;
+                }
+
+                .form-row {
+                    grid-template-columns: 1fr;
+                }
+
+                .contact-item {
+                    gap: 15px;
+                }
+
+                .contact-icon {
+                    width: 45px;
+                    height: 45px;
+                    font-size: 1.1rem;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Language Toggle -->
+        <div class="language-toggle">
+            <button class="lang-btn" data-lang="en">EN</button>
+            <button class="lang-btn active" data-lang="tr">TR</button>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="brand-logo">
+                    <a href="../">
+                        <i class="fas fa-bolt"></i>
+                        <span>ZikZak AI</span>
+                    </a>
+                </div>
+                <div class="nav-links">
+                    <a
+                        href="../#features"
+                        data-en="Features"
+                        data-tr="Özellikler"
+                        >Özellikler</a
+                    >
+                    <a
+                        href="../#how-it-works"
+                        data-en="How It Works"
+                        data-tr="Nasıl Çalışır"
+                        >Nasıl Çalışır</a
+                    >
+                    <a
+                        href="../#download"
+                        data-en="Download"
+                        data-tr="İndir"
+                        class="nav-download"
+                        >İndir</a
+                    >
+                </div>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Contact Content -->
+        <div class="contact-content">
+            <a href="../" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                <span data-en="Back to Home" data-tr="Ana Sayfaya Dön"
+                    >Ana Sayfaya Dön</span
+                >
+            </a>
+
+            <div class="contact-header">
+                <h1 data-en="Contact Us" data-tr="İletişim">İletişim</h1>
+                <p
+                    class="subtitle"
+                    data-en="We'd love to hear from you. Send us a message and we'll respond as soon as possible."
+                    data-tr="Sizden haber almaktan memnuniyet duyarız. Bize mesaj gönderin, en kısa sürede yanıtlayalım."
+                >
+                    Sizden haber almaktan memnuniyet duyarız. Bize mesaj
+                    gönderin, en kısa sürede yanıtlayalım.
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <h2 data-en="Get In Touch" data-tr="İletişim Bilgileri">
+                        İletişim Bilgileri
+                    </h2>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3 data-en="Email" data-tr="E-posta">E-posta</h3>
+                            <p>
+                                <a href="mailto:admin@zuzu.dev"
+                                    >admin@zuzu.dev</a
+                                >
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3 data-en="Address" data-tr="Adres">Adres</h3>
+                            <p>
+                                ZUZU YAZILIM A.Ş.<br />
+                                YILDIRIM BEYAZIT MAH.<br />
+                                AŞIK VEYSEL BLV. 67/4 TEKNO-5 K2 D79<br />
+                                38039 Melikgazi/Kayseri, Türkiye
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3 data-en="Response Time" data-tr="Yanıt Süresi">
+                                Yanıt Süresi
+                            </h3>
+                            <p
+                                data-en="We typically respond within 24 hours"
+                                data-tr="Genellikle 24 saat içinde yanıt veriyoruz"
+                            >
+                                Genellikle 24 saat içinde yanıt veriyoruz
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h2 data-en="Send Message" data-tr="Mesaj Gönder">
+                        Mesaj Gönder
+                    </h2>
+
+                    <div class="success-message">
+                        <i class="fas fa-check-circle"></i>
+                        <span
+                            data-en="Thank you! Your message has been sent successfully."
+                            data-tr="Teşekkürler! Mesajınız başarıyla gönderildi."
+                            >Teşekkürler! Mesajınız başarıyla gönderildi.</span
+                        >
+                    </div>
+
+                    <div class="error-message">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span
+                            data-en="Sorry, there was an error sending your message. Please try again."
+                            data-tr="Üzgünüz, mesajınız gönderilirken bir hata oluştu. Lütfen tekrar deneyin."
+                            >Üzgünüz, mesajınız gönderilirken bir hata oluştu.
+                            Lütfen tekrar deneyin.</span
+                        >
+                    </div>
+
+                    <form
+                        id="contact-form"
+                        action="https://formspree.io/f/YOUR_FORM_ID"
+                        method="POST"
+                    >
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label
+                                    for="name"
+                                    data-en="Name"
+                                    data-tr="Ad Soyad"
+                                    >Ad Soyad</label
+                                >
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    required
+                                    data-en-placeholder="Your full name"
+                                    data-tr-placeholder="Adınız ve soyadınız"
+                                    placeholder="Adınız ve soyadınız"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label
+                                    for="email"
+                                    data-en="Email"
+                                    data-tr="E-posta"
+                                    >E-posta</label
+                                >
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    required
+                                    data-en-placeholder="your@email.com"
+                                    data-tr-placeholder="eposta@adresiniz.com"
+                                    placeholder="eposta@adresiniz.com"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label
+                                for="subject"
+                                data-en="Subject"
+                                data-tr="Konu"
+                                >Konu</label
+                            >
+                            <select id="subject" name="subject" required>
+                                <option
+                                    value=""
+                                    data-en="Select a subject"
+                                    data-tr="Bir konu seçin"
+                                >
+                                    Bir konu seçin
+                                </option>
+                                <option
+                                    value="general"
+                                    data-en="General Inquiry"
+                                    data-tr="Genel Sorular"
+                                >
+                                    Genel Sorular
+                                </option>
+                                <option
+                                    value="support"
+                                    data-en="Technical Support"
+                                    data-tr="Teknik Destek"
+                                >
+                                    Teknik Destek
+                                </option>
+                                <option
+                                    value="feedback"
+                                    data-en="Feedback"
+                                    data-tr="Geri Bildirim"
+                                >
+                                    Geri Bildirim
+                                </option>
+                                <option
+                                    value="partnership"
+                                    data-en="Partnership"
+                                    data-tr="İş Birliği"
+                                >
+                                    İş Birliği
+                                </option>
+                                <option
+                                    value="bug"
+                                    data-en="Bug Report"
+                                    data-tr="Hata Bildirimi"
+                                >
+                                    Hata Bildirimi
+                                </option>
+                                <option
+                                    value="other"
+                                    data-en="Other"
+                                    data-tr="Diğer"
+                                >
+                                    Diğer
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label
+                                for="message"
+                                data-en="Message"
+                                data-tr="Mesaj"
+                                >Mesaj</label
+                            >
+                            <textarea
+                                id="message"
+                                name="message"
+                                required
+                                data-en-placeholder="Tell us how we can help you..."
+                                data-tr-placeholder="Size nasıl yardımcı olabiliriz..."
+                                placeholder="Size nasıl yardımcı olabiliriz..."
+                            ></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            <span data-en="Send Message" data-tr="Mesaj Gönder"
+                                >Mesaj Gönder</span
+                            >
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <div class="brand-logo">
+                            <i class="fas fa-bolt"></i>
+                            <span>ZikZak AI</span>
+                        </div>
+                        <p
+                            data-en="Smart shopping starts here"
+                            data-tr="Akıllı alışveriş burada başlar"
+                        >
+                            Akıllı alışveriş burada başlar
+                        </p>
+                    </div>
+
+                    <div class="footer-links">
+                        <div class="footer-column">
+                            <h4 data-en="Contact" data-tr="İletişim">
+                                İletişim
+                            </h4>
+                            <ul>
+                                <li>
+                                    <a
+                                        href="mailto:admin@zuzu.dev"
+                                        data-en="Email Us"
+                                        data-tr="E-posta"
+                                        >E-posta</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        data-en="Contact Form"
+                                        data-tr="İletişim Formu"
+                                        >İletişim Formu</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="footer-column">
+                            <h4 data-en="Legal" data-tr="Yasal">Yasal</h4>
+                            <ul>
+                                <li>
+                                    <a
+                                        href="../privacy-policy/"
+                                        data-en="Privacy Policy"
+                                        data-tr="Gizlilik Politikası"
+                                        >Gizlilik Politikası</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="../data-processing-disclosure/"
+                                        data-en="Data Processing"
+                                        data-tr="KVKK Aydınlatma"
+                                        >KVKK Aydınlatma</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>
+                        &copy; 2024 ZikZak AI.
+                        <span
+                            data-en="All rights reserved."
+                            data-tr="Tüm hakları saklıdır."
+                            >Tüm hakları saklıdır.</span
+                        >
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="../script.js"></script>
+        <script>
+            // Contact form handling
+            document.addEventListener("DOMContentLoaded", function () {
+                const form = document.getElementById("contact-form");
+                const successMessage =
+                    document.querySelector(".success-message");
+                const errorMessage = document.querySelector(".error-message");
+                const submitBtn = form.querySelector(".submit-btn");
+                const submitBtnText = submitBtn.querySelector("span");
+                const submitBtnIcon = submitBtn.querySelector("i");
+
+                form.addEventListener("submit", async function (e) {
+                    e.preventDefault();
+
+                    // Show loading state
+                    submitBtn.disabled = true;
+                    submitBtnIcon.className = "fas fa-spinner fa-spin";
+                    submitBtnText.textContent =
+                        submitBtnText.dataset.loading || "Gönderiliyor...";
+
+                    // Hide previous messages
+                    successMessage.style.display = "none";
+                    errorMessage.style.display = "none";
+
+                    try {
+                        const formData = new FormData(form);
+                        const response = await fetch(form.action, {
+                            method: "POST",
+                            body: formData,
+                            headers: {
+                                Accept: "application/json",
+                            },
+                        });
+
+                        if (response.ok) {
+                            // Success
+                            successMessage.style.display = "block";
+                            form.reset();
+                            setTimeout(() => {
+                                successMessage.style.display = "none";
+                            }, 5000);
+                        } else {
+                            // Error
+                            errorMessage.style.display = "block";
+                            setTimeout(() => {
+                                errorMessage.style.display = "none";
+                            }, 5000);
+                        }
+                    } catch (error) {
+                        // Network error
+                        errorMessage.style.display = "block";
+                        setTimeout(() => {
+                            errorMessage.style.display = "none";
+                        }, 5000);
+                    }
+
+                    // Reset button state
+                    submitBtn.disabled = false;
+                    submitBtnIcon.className = "fas fa-paper-plane";
+                    submitBtnText.textContent =
+                        submitBtnText.getAttribute("data-tr") || "Mesaj Gönder";
+                });
+
+                // Update button loading text on language change
+                function updateLoadingText() {
+                    const currentLang =
+                        localStorage.getItem("zikzak-language") || "tr";
+                    const loadingTexts = {
+                        tr: "Gönderiliyor...",
+                        en: "Sending...",
+                    };
+                    submitBtnText.dataset.loading = loadingTexts[currentLang];
+                }
+
+                // Call on page load and language change
+                updateLoadingText();
+                document.addEventListener("languageChanged", updateLoadingText);
+            });
+        </script>
+    </body>
+</html>
