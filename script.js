@@ -31,11 +31,24 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    // Update text content
+    // Update text content and placeholders
     elementsWithTranslation.forEach((element) => {
       const text = element.getAttribute(`data-${lang}`);
       if (text) {
         element.textContent = text;
+      }
+      // Update placeholder on inputs/textareas
+      const placeholderAttr = `data-${lang}-placeholder`;
+      if (element.hasAttribute(placeholderAttr)) {
+        element.setAttribute("placeholder", element.getAttribute(placeholderAttr));
+      }
+    });
+
+    // Update <select> option text
+    document.querySelectorAll("select option[data-en][data-tr]").forEach((opt) => {
+      const text = opt.getAttribute(`data-${lang}`);
+      if (text) {
+        opt.textContent = text;
       }
     });
 

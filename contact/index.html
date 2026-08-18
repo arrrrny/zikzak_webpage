@@ -663,8 +663,9 @@
                     // Show loading state
                     submitBtn.disabled = true;
                     submitBtnIcon.className = "fas fa-spinner fa-spin";
+                    const currentLang = localStorage.getItem("zikzak-language") || "tr";
                     submitBtnText.textContent =
-                        submitBtnText.dataset.loading || "Gönderiliyor...";
+                        submitBtnText.dataset.loading || (currentLang === "en" ? "Sending..." : "Gönderiliyor...");
 
                     // Hide previous messages
                     successMessage.style.display = "none";
@@ -705,8 +706,9 @@
                     // Reset button state
                     submitBtn.disabled = false;
                     submitBtnIcon.className = "fas fa-paper-plane";
+                    const resetLang = localStorage.getItem("zikzak-language") || "tr";
                     submitBtnText.textContent =
-                        submitBtnText.getAttribute("data-tr") || "Mesaj Gönder";
+                        submitBtnText.getAttribute(`data-${resetLang}`) || "Mesaj Gönder";
                 });
 
                 // Update button loading text on language change
