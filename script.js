@@ -37,7 +37,10 @@ document.addEventListener("DOMContentLoaded", function () {
       if (text) {
         element.textContent = text;
       }
-      // Update placeholder on inputs/textareas
+    });
+
+    // Update placeholders on inputs/textareas
+    document.querySelectorAll("[data-en-placeholder], [data-tr-placeholder]").forEach((element) => {
       const placeholderAttr = `data-${lang}-placeholder`;
       if (element.hasAttribute(placeholderAttr)) {
         element.setAttribute("placeholder", element.getAttribute(placeholderAttr));

@@ -249,6 +249,10 @@ body {
     color: #000;
 }
 
+.download-btn.mac i {
+    color: #000;
+}
+
 .download-btn.android i {
     color: #34a853;
 }
@@ -590,6 +594,10 @@ body {
 }
 
 .download-btn-large.ios i {
+    color: #000;
+}
+
+.download-btn-large.mac i {
     color: #000;
 }
 
