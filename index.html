@@ -12,8 +12,10 @@
         />
 
         <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
             rel="stylesheet"
         />
 
@@ -27,19 +29,17 @@
         <link rel="stylesheet" href="style.css" />
 
         <!-- Favicon -->
-        <link rel="icon" type="image/png" href="zik_zak.png" />
+        <link rel="icon" type="image/png" href="assets/icon.png" />
+        <link rel="apple-touch-icon" href="assets/icon.png" />
 
         <!-- Open Graph -->
-        <meta
-            property="og:title"
-            content="ZikZak AI - Smart Price Comparison"
-        />
+        <meta property="og:title" content="ZikZak AI - Smart Price Comparison" />
         <meta
             property="og:description"
             content="Find the best deals with AI-powered price comparison"
         />
-        <meta property="og:image" content="/og-image.png" />
-        <meta property="og:url" content="https://zik-zak.zuzu.dev" />
+        <meta property="og:image" content="https://zuzu.dev/assets/icon.png" />
+        <meta property="og:url" content="https://zuzu.dev" />
         <meta property="og:type" content="website" />
     </head>
     <body>
@@ -52,10 +52,14 @@
         <!-- Navigation -->
         <nav class="navbar">
             <div class="nav-container">
-                <div class="nav-brand">
-                    <i class="fas fa-bolt"></i>
-                    <span>ZikZak AI</span>
-                </div>
+                <a href="#" class="nav-brand">
+                    <img
+                        src="assets/z-logo.svg"
+                        alt="ZikZak AI"
+                        class="nav-logo"
+                    />
+                    <span class="nav-wordmark">ZikZak</span>
+                </a>
                 <div class="nav-links">
                     <a href="#features" data-en="Features" data-tr="Özellikler"
                         >Özellikler</a
@@ -66,13 +70,10 @@
                         data-tr="Nasıl Çalışır"
                         >Nasıl Çalışır</a
                     >
-                    <a
-                        href="#download"
-                        data-en="Download"
-                        data-tr="İndir"
-                        class="nav-download"
-                        >İndir</a
-                    >
+                    <a href="#download" class="nav-cta">
+                        <span data-en="Download" data-tr="İndir">İndir</span>
+                        <i class="fas fa-arrow-down"></i>
+                    </a>
                 </div>
                 <div class="mobile-menu-toggle">
                     <i class="fas fa-bars"></i>
@@ -82,25 +83,49 @@
 
         <!-- Hero Section -->
         <section class="hero">
-            <div class="hero-content">
+            <div class="hero-bg" aria-hidden="true">
+                <div class="hero-glow"></div>
+                <div class="hero-grid"></div>
+            </div>
+            <div class="hero-content container">
                 <div class="hero-text">
-                    <h1
-                        data-en="Find the Best Deals with AI-Powered Price Comparison"
-                        data-tr="Yapay Zekalı Fiyat Karşılaştırması ile En İyi Fırsatları Bulun"
-                    >
-                        Yapay Zekalı Fiyat Karşılaştırması ile En İyi Fırsatları
-                        Bulun
+                    <div class="hero-badge">
+                        <span class="pulse-dot"></span>
+                        <span
+                            data-en="AI-Powered Price Comparison"
+                            data-tr="Yapay Zekâ Destekli Fiyat Karşılaştırma"
+                            >Yapay Zekâ Destekli Fiyat Karşılaştırma</span
+                        >
+                    </div>
+                    <h1>
+                        <span
+                            data-en="Never"
+                            data-tr="Bir daha"
+                            class="h1-line"
+                            >Bir daha</span
+                        >
+                        <span
+                            class="h1-gradient"
+                            data-en="overpay"
+                            data-tr="fazla ödeme"
+                            >fazla ödeme</span
+                        >
+                        <span
+                            data-en="again."
+                            data-tr="yapma."
+                            class="h1-line"
+                            >yapma.</span
+                        >
                     </h1>
                     <p
-                        data-en="Chat with ZikZak AI, scan barcodes, and discover amazing savings instantly. Your personal shopping assistant that never sleeps."
-                        data-tr="ZikZak AI ile sohbet edin, barkodları tarayın ve anında harika tasarruflar keşfedin. Hiç uyumayan kişisel alışveriş asistanınız."
+                        class="hero-sub"
+                        data-en="Chat with ZikZak AI, scan any barcode, and catch the best price across every store — in seconds."
+                        data-tr="ZikZak AI ile sohbet et, barkodu tara ve tüm mağazalardaki en iyi fiyatı saniyeler içinde yakala."
                     >
-                        ZikZak AI ile sohbet edin, barkodları tarayın ve anında
-                        harika tasarruflar keşfedin. Hiç uyumayan kişisel
-                        alışveriş asistanınız.
+                        ZikZak AI ile sohbet et, barkodu tara ve tüm
+                        mağazalardaki en iyi fiyatı saniyeler içinde yakala.
                     </p>
 
-                    <!-- Main Download Buttons -->
                     <div class="download-buttons">
                         <a
                             href="https://apps.apple.com/tr/app/zik-zak/id1563425450"
@@ -120,23 +145,6 @@
                             </div>
                         </a>
                         <a
-                            href="https://apps.apple.com/app/zik-zak/id1563425450"
-                            class="download-btn mac"
-                            target="_blank"
-                            rel="noopener"
-                        >
-                            <i class="fab fa-apple"></i>
-                            <div>
-                                <span
-                                    class="download-text"
-                                    data-en="Download on the"
-                                    data-tr="İndir"
-                                    >İndir</span
-                                >
-                                <span class="store-name">Mac App Store</span>
-                            </div>
-                        </a>
-                        <a
                             href="https://play.google.com/store/apps/details?id=dev.zuzu.zingo"
                             class="download-btn android"
                             target="_blank"
@@ -153,9 +161,25 @@
                                 <span class="store-name">Google Play</span>
                             </div>
                         </a>
+                        <a
+                            href="https://apps.apple.com/app/zik-zak/id1563425450"
+                            class="download-btn mac"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <i class="fab fa-apple"></i>
+                            <div>
+                                <span
+                                    class="download-text"
+                                    data-en="Download on the"
+                                    data-tr="İndir"
+                                    >İndir</span
+                                >
+                                <span class="store-name">Mac App Store</span>
+                            </div>
+                        </a>
                     </div>
 
-                    <!-- Stats -->
                     <div class="hero-stats">
                         <div class="stat">
                             <span class="stat-number">1M+</span>
@@ -166,20 +190,22 @@
                                 >Karşılaştırılan Ürün</span
                             >
                         </div>
+                        <div class="stat-divider"></div>
                         <div class="stat">
                             <span class="stat-number">500K+</span>
                             <span
                                 class="stat-label"
-                                data-en="Happy Users"
+                                data-en="Happy Shoppers"
                                 data-tr="Mutlu Kullanıcı"
                                 >Mutlu Kullanıcı</span
                             >
                         </div>
+                        <div class="stat-divider"></div>
                         <div class="stat">
                             <span class="stat-number">₺2.5M+</span>
                             <span
                                 class="stat-label"
-                                data-en="Total Savings"
+                                data-en="User Savings"
                                 data-tr="Toplam Tasarruf"
                                 >Toplam Tasarruf</span
                             >
@@ -189,165 +215,289 @@
 
                 <div class="hero-visual">
                     <div class="phone-mockup">
-                        <div class="phone-screen">
-                            <div class="chat-interface">
-                                <div class="chat-header">
-                                    <div class="ai-avatar">🤖</div>
-                                    <span>ZikZak AI</span>
-                                </div>
-                                <div class="chat-messages">
-                                    <div class="message ai">
-                                        <span
-                                            data-en="I found 5 amazing deals for iPhone 15!"
-                                            data-tr="iPhone 15 için 5 harika fırsat buldum!"
-                                        >
-                                            iPhone 15 için 5 harika fırsat
-                                            buldum!
-                                        </span>
-                                    </div>
-                                    <div class="message user">
-                                        <span
-                                            data-en="Show me the cheapest"
-                                            data-tr="En ucuzunu göster"
-                                            >En ucuzunu göster</span
-                                        >
-                                    </div>
-                                    <div class="message ai">
-                                        <div class="deal-card">
-                                            <span class="price">₺24,999</span>
-                                            <span class="discount"
-                                                >15% OFF</span
-                                            >
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="phone-frame">
+                            <div class="phone-notch"></div>
+                            <img
+                                src="assets/screenshots/01_smart_compare_search.jpg"
+                                alt="ZikZak AI smart compare search"
+                                class="phone-screen"
+                            />
+                        </div>
+                        <div class="phone-shadow"></div>
+                    </div>
+                    <div class="float-card card-deal">
+                        <div class="float-card-icon">
+                            <i class="fas fa-tag"></i>
+                        </div>
+                        <div class="float-card-body">
+                            <span
+                                class="float-card-title"
+                                data-en="Price drop alert"
+                                data-tr="Fiyat düştü"
+                                >Fiyat düştü</span
+                            >
+                            <span class="float-card-value"
+                                >Sony WH-1000XM5 · −15%</span
+                            >
+                        </div>
+                    </div>
+                    <div class="float-card card-price">
+                        <div class="float-card-icon green">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="float-card-body">
+                            <span
+                                class="float-card-title"
+                                data-en="Best price found"
+                                data-tr="En iyi fiyat"
+                                >En iyi fiyat</span
+                            >
+                            <span class="float-card-value">$379.99</span>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Floating Elements -->
-            <div class="floating-elements">
-                <div class="floating-icon" style="top: 20%; left: 10%">💰</div>
-                <div class="floating-icon" style="top: 60%; right: 15%">🛍️</div>
-                <div class="floating-icon" style="top: 30%; right: 30%">⚡</div>
-            </div>
         </section>
 
-        <!-- Features Section -->
+        <!-- Retailer Ticker -->
+        <div class="ticker" aria-hidden="true">
+            <div class="ticker-track">
+                <span>Trendyol</span><i class="fas fa-bolt"></i>
+                <span>Hepsiburada</span><i class="fas fa-bolt"></i>
+                <span>Amazon</span><i class="fas fa-bolt"></i>
+                <span>Walmart</span><i class="fas fa-bolt"></i>
+                <span>Target</span><i class="fas fa-bolt"></i>
+                <span>Google Shopping</span><i class="fas fa-bolt"></i>
+                <span>n11</span><i class="fas fa-bolt"></i>
+                <span>eBay</span><i class="fas fa-bolt"></i>
+                <span>Trendyol</span><i class="fas fa-bolt"></i>
+                <span>Hepsiburada</span><i class="fas fa-bolt"></i>
+                <span>Amazon</span><i class="fas fa-bolt"></i>
+                <span>Walmart</span><i class="fas fa-bolt"></i>
+                <span>Target</span><i class="fas fa-bolt"></i>
+                <span>Google Shopping</span><i class="fas fa-bolt"></i>
+                <span>n11</span><i class="fas fa-bolt"></i>
+                <span>eBay</span><i class="fas fa-bolt"></i>
+            </div>
+        </div>
+
+        <!-- Features Bento -->
         <section id="features" class="features">
             <div class="container">
-                <h2 data-en="Why Choose ZikZak AI?" data-tr="Neden ZikZak AI?">
-                    Neden ZikZak AI?
-                </h2>
+                <div class="section-head">
+                    <span
+                        class="section-eyebrow"
+                        data-en="Features"
+                        data-tr="Özellikler"
+                        >Özellikler</span
+                    >
+                    <h2
+                        data-en="Your unfair shopping advantage"
+                        data-tr="Alışverişteki haksız avantajın"
+                    >
+                        Alışverişteki haksız avantajın
+                    </h2>
+                    <p
+                        data-en="Everything you need to outsmart any price — built into one app."
+                        data-tr="Her fiyatı alt etmek için ihtiyacın olan her şey — tek uygulamada."
+                    >
+                        Her fiyatı alt etmek için ihtiyacın olan her şey — tek
+                        uygulamada.
+                    </p>
+                </div>
 
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">🤖</div>
-                        <h3
-                            data-en="AI-Powered Chat"
-                            data-tr="AI Destekli Sohbet"
-                        >
-                            AI Destekli Sohbet
-                        </h3>
-                        <p
-                            data-en="Simply ask for any product and get instant price comparisons with smart recommendations"
-                            data-tr="Herhangi bir ürünü sorun ve akıllı önerilerle anında fiyat karşılaştırmaları alın"
-                        >
-                            Herhangi bir ürünü sorun ve akıllı önerilerle anında
-                            fiyat karşılaştırmaları alın
-                        </p>
-                    </div>
+                <div class="bento">
+                    <article class="bento-card bento-ai reveal">
+                        <div class="bento-screenshot">
+                            <img
+                                src="assets/screenshots/06_ask_zikzak.jpg"
+                                alt="Ask ZikZak AI chat"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="bento-overlay">
+                            <h3>Ask ZikZak</h3>
+                            <p
+                                data-en="Ask anything — “best serum under $30?” — and get a ranked, sourced answer in seconds."
+                                data-tr="Her şeyi sor — “30$ altı en iyi serum?” — saniyeler içinde sıralanmış, kaynaklı cevap al."
+                            >
+                                Her şeyi sor — “30$ altı en iyi serum?” —
+                                saniyeler içinde sıralanmış, kaynaklı cevap al.
+                            </p>
+                        </div>
+                    </article>
 
-                    <div class="feature-card">
-                        <div class="feature-icon">📱</div>
-                        <h3 data-en="Barcode Scanner" data-tr="Barkod Tarayıcı">
-                            Barkod Tarayıcı
-                        </h3>
-                        <p
-                            data-en="Scan any product barcode to instantly find the best prices across all major retailers"
-                            data-tr="Herhangi bir ürün barkodunu tarayarak tüm büyük perakendecilerde en iyi fiyatları anında bulun"
-                        >
-                            Herhangi bir ürün barkodunu tarayarak tüm büyük
-                            perakendecilerde en iyi fiyatları anında bulun
-                        </p>
-                    </div>
+                    <article class="bento-card reveal">
+                        <div class="bento-screenshot">
+                            <img
+                                src="assets/screenshots/05_barcode_comparison.jpg"
+                                alt="Barcode price comparison"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="bento-overlay">
+                            <h3
+                                data-en="Scan & Compare"
+                                data-tr="Tara & Karşılaştır"
+                            >
+                                Tara &amp; Karşılaştır
+                            </h3>
+                            <p
+                                data-en="Point at any barcode and see every retailer's price side by side."
+                                data-tr="Herhangi bir barkoda tut, tüm mağazaların fiyatını yan yana gör."
+                            >
+                                Herhangi bir barkoda tut, tüm mağazaların
+                                fiyatını yan yana gör.
+                            </p>
+                        </div>
+                    </article>
 
-                    <div class="feature-card">
-                        <div class="feature-icon">⚡</div>
-                        <h3 data-en="Lightning Fast" data-tr="Işık Hızında">
+                    <article class="bento-card reveal">
+                        <div class="bento-screenshot">
+                            <img
+                                src="assets/screenshots/03_smart_filter.jpg"
+                                alt="Smart filters"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="bento-overlay">
+                            <h3
+                                data-en="Smart Filters"
+                                data-tr="Akıllı Filtreler"
+                            >
+                                Akıllı Filtreler
+                            </h3>
+                            <p
+                                data-en="Filter by seller, price range or rating — results update live."
+                                data-tr="Satıcı, fiyat aralığı veya puana göre filtrele — sonuçlar anında güncellenir."
+                            >
+                                Satıcı, fiyat aralığı veya puana göre filtrele —
+                                sonuçlar anında güncellenir.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="bento-card reveal">
+                        <div class="bento-screenshot">
+                            <img
+                                src="assets/screenshots/04_deals_feed.jpg"
+                                alt="Live deals feed"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="bento-overlay">
+                            <h3
+                                data-en="Live Deal Feed"
+                                data-tr="Canlı Fırsat Akışı"
+                            >
+                                Canlı Fırsat Akışı
+                            </h3>
+                            <p
+                                data-en="Real drops, refreshed non-stop — never miss a discount again."
+                                data-tr="Kesintisiz yenilenen gerçek indirimler — artık hiçbir fırsatı kaçırma."
+                            >
+                                Kesintisiz yenilenen gerçek indirimler — artık
+                                hiçbir fırsatı kaçırma.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="bento-card reveal">
+                        <div class="bento-screenshot">
+                            <img
+                                src="assets/screenshots/02_sneaker_variations.jpg"
+                                alt="Product variations"
+                                loading="lazy"
+                            />
+                        </div>
+                        <div class="bento-overlay">
+                            <h3
+                                data-en="Every Variation"
+                                data-tr="Tüm Varyasyonlar"
+                            >
+                                Tüm Varyasyonlar
+                            </h3>
+                            <p
+                                data-en="Colors, sizes, bundles — one grid to compare them all."
+                                data-tr="Renk, beden, set — hepsini karşılaştıran tek bir ızgara."
+                            >
+                                Renk, beden, set — hepsini karşılaştıran tek bir
+                                ızgara.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="mini-features reveal">
+                    <div class="mini-feature">
+                        <div class="mini-icon"><i class="fas fa-bolt"></i></div>
+                        <h4
+                            data-en="Lightning Fast"
+                            data-tr="Işık Hızında"
+                        >
                             Işık Hızında
-                        </h3>
+                        </h4>
                         <p
-                            data-en="Get results in seconds with our optimized search engine and real-time price tracking"
-                            data-tr="Optimize edilmiş arama motorumuz ve gerçek zamanlı fiyat takibi ile saniyeler içinde sonuç alın"
+                            data-en="Results in seconds, prices tracked in real time."
+                            data-tr="Saniyeler içinde sonuç, gerçek zamanlı fiyat takibi."
                         >
-                            Optimize edilmiş arama motorumuz ve gerçek zamanlı
-                            fiyat takibi ile saniyeler içinde sonuç alın
+                            Saniyeler içinde sonuç, gerçek zamanlı fiyat takibi.
                         </p>
                     </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">💎</div>
-                        <h3 data-en="Smart Filters" data-tr="Akıllı Filtreler">
-                            Akıllı Filtreler
-                        </h3>
-                        <p
-                            data-en="Set your preferences once and get personalized deals that match your shopping style"
-                            data-tr="Tercihlerinizi bir kez ayarlayın ve alışveriş tarzınıza uygun kişiselleştirilmiş fırsatlar alın"
+                    <div class="mini-feature">
+                        <div class="mini-icon"><i class="fas fa-bell"></i></div>
+                        <h4
+                            data-en="Price Alerts"
+                            data-tr="Fiyat Alarmları"
                         >
-                            Tercihlerinizi bir kez ayarlayın ve alışveriş
-                            tarzınıza uygun kişiselleştirilmiş fırsatlar alın
+                            Fiyat Alarmları
+                        </h4>
+                        <p
+                            data-en="Get notified the moment a product you love drops."
+                            data-tr="Sevdiğin ürünün fiyatı düştüğü an bildirim al."
+                        >
+                            Sevdiğin ürünün fiyatı düştüğü an bildirim al.
                         </p>
                     </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">🔔</div>
-                        <h3 data-en="Price Alerts" data-tr="Fiyat Uyarıları">
-                            Fiyat Uyarıları
-                        </h3>
-                        <p
-                            data-en="Never miss a deal! Get notified when your favorite products drop in price"
-                            data-tr="Hiçbir fırsatı kaçırmayın! Favori ürünlerinizin fiyatları düştüğünde bildirim alın"
-                        >
-                            Hiçbir fırsatı kaçırmayın! Favori ürünlerinizin
-                            fiyatları düştüğünde bildirim alın
-                        </p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">🛡️</div>
-                        <h3
+                    <div class="mini-feature">
+                        <div class="mini-icon"><i class="fas fa-shield-halved"></i></div>
+                        <h4
                             data-en="Trusted & Secure"
                             data-tr="Güvenilir & Güvenli"
                         >
-                            Güvenilir & Güvenli
-                        </h3>
+                            Güvenilir &amp; Güvenli
+                        </h4>
                         <p
-                            data-en="Your data is safe with us. We only compare prices, never store payment information"
-                            data-tr="Verileriniz bizimle güvende. Sadece fiyatları karşılaştırıyoruz, ödeme bilgilerini saklamıyoruz"
+                            data-en="We compare prices only — never store payment info."
+                            data-tr="Sadece fiyat karşılaştırırız — ödeme bilgisi saklamayız."
                         >
-                            Verileriniz bizimle güvende. Sadece fiyatları
-                            karşılaştırıyoruz, ödeme bilgilerini saklamıyoruz
+                            Sadece fiyat karşılaştırırız — ödeme bilgisi
+                            saklamayız.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- How It Works Section -->
+        <!-- How It Works -->
         <section id="how-it-works" class="how-it-works">
             <div class="container">
-                <h2
-                    data-en="How ZikZak AI Works"
-                    data-tr="ZikZak AI Nasıl Çalışır"
-                >
-                    ZikZak AI Nasıl Çalışır
-                </h2>
-
+                <div class="section-head">
+                    <span
+                        class="section-eyebrow"
+                        data-en="How it works"
+                        data-tr="Nasıl çalışır"
+                        >Nasıl çalışır</span
+                    >
+                    <h2
+                        data-en="Three steps to the best price"
+                        data-tr="En iyi fiyata üç adım"
+                    >
+                        En iyi fiyata üç adım
+                    </h2>
+                </div>
                 <div class="steps">
-                    <div class="step">
+                    <div class="step reveal">
                         <div class="step-number">1</div>
                         <div class="step-content">
                             <h3
@@ -357,43 +507,46 @@
                                 Sohbet Et veya Tara
                             </h3>
                             <p
-                                data-en="Ask ZikZak AI about any product or scan a barcode"
-                                data-tr="ZikZak AI'ya herhangi bir ürünü sorun veya barkod tarayın"
+                                data-en="Ask ZikZak AI about any product, or scan its barcode in-store."
+                                data-tr="ZikZak AI'a herhangi bir ürünü sor veya mağazada barkodunu tarat."
                             >
-                                ZikZak AI'ya herhangi bir ürünü sorun veya
-                                barkod tarayın
+                                ZikZak AI'a herhangi bir ürünü sor veya
+                                mağazada barkodunu tarat.
                             </p>
                         </div>
                     </div>
-
-                    <div class="step">
+                    <div class="step-connector" aria-hidden="true"></div>
+                    <div class="step reveal">
                         <div class="step-number">2</div>
                         <div class="step-content">
                             <h3 data-en="AI Analysis" data-tr="AI Analizi">
                                 AI Analizi
                             </h3>
                             <p
-                                data-en="Our AI searches across thousands of retailers in real-time"
-                                data-tr="AI'mız gerçek zamanlı olarak binlerce perakendecide arama yapar"
+                                data-en="Our AI searches thousands of retailers in real time and ranks every offer."
+                                data-tr="AI'mız gerçek zamanlı olarak binlerce perakendeciyi tarar ve her teklifi sıralar."
                             >
                                 AI'mız gerçek zamanlı olarak binlerce
-                                perakendecide arama yapar
+                                perakendeciyi tarar ve her teklifi sıralar.
                             </p>
                         </div>
                     </div>
-
-                    <div class="step">
+                    <div class="step-connector" aria-hidden="true"></div>
+                    <div class="step reveal">
                         <div class="step-number">3</div>
                         <div class="step-content">
-                            <h3 data-en="Best Deals" data-tr="En İyi Fırsatlar">
+                            <h3
+                                data-en="Best Deals"
+                                data-tr="En İyi Fırsatlar"
+                            >
                                 En İyi Fırsatlar
                             </h3>
                             <p
-                                data-en="Get ranked results with the best prices and exclusive offers"
-                                data-tr="En iyi fiyatlar ve özel tekliflerle sıralanmış sonuçlar alın"
+                                data-en="Buy with confidence at the lowest price — or set an alert and wait."
+                                data-tr="En düşük fiyatla güvenle al — ya da alarm kur ve bekle."
                             >
-                                En iyi fiyatlar ve özel tekliflerle sıralanmış
-                                sonuçlar alın
+                                En düşük fiyatla güvenle al — ya da alarm kur ve
+                                bekle.
                             </p>
                         </div>
                     </div>
@@ -404,22 +557,26 @@
         <!-- Download Section -->
         <section id="download" class="download-section">
             <div class="container">
-                <div class="download-content">
+                <div class="download-panel reveal">
+                    <div class="download-panel-glow" aria-hidden="true"></div>
+                    <img
+                        src="assets/z-logo.svg"
+                        alt=""
+                        class="download-logo"
+                        aria-hidden="true"
+                    />
                     <h2
-                        data-en="Ready to Start Saving?"
-                        data-tr="Tasarruf Etmeye Hazır mısınız?"
+                        data-en="Ready to start saving?"
+                        data-tr="Tasarrufa hazır mısın?"
                     >
-                        Tasarruf Etmeye Hazır mısınız?
+                        Tasarrufa hazır mısın?
                     </h2>
                     <p
-                        data-en="Join millions of smart shoppers who save money every day with ZikZak AI"
-                        data-tr="ZikZak AI ile her gün para biriktiren milyonlarca akıllı alışverişçiye katılın"
+                        data-en="Join hundreds of thousands of smart shoppers who never overpay."
+                        data-tr="Fazla ödemeyen yüz binlerce akıllı alışverişçiye katıl."
                     >
-                        ZikZak AI ile her gün para biriktiren milyonlarca akıllı
-                        alışverişçiye katılın
+                        Fazla ödemeyen yüz binlerce akıllı alışverişçiye katıl.
                     </p>
-
-                    <!-- Large Download Buttons -->
                     <div class="download-buttons-large">
                         <a
                             href="https://apps.apple.com/tr/app/zik-zak/id1563425450"
@@ -435,24 +592,7 @@
                                     data-tr="İndir"
                                     >İndir</span
                                 >
-                                <span class="store-name">iPhone & iPad</span>
-                            </div>
-                        </a>
-                        <a
-                            href="https://apps.apple.com/app/zik-zak/id1563425450"
-                            class="download-btn-large mac"
-                            target="_blank"
-                            rel="noopener"
-                        >
-                            <i class="fab fa-apple"></i>
-                            <div>
-                                <span
-                                    class="download-text"
-                                    data-en="Download for"
-                                    data-tr="İndir"
-                                    >İndir</span
-                                >
-                                <span class="store-name">Mac</span>
+                                <span class="store-name">iPhone &amp; iPad</span>
                             </div>
                         </a>
                         <a
@@ -472,6 +612,23 @@
                                 <span class="store-name">Android</span>
                             </div>
                         </a>
+                        <a
+                            href="https://apps.apple.com/app/zik-zak/id1563425450"
+                            class="download-btn-large mac"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            <i class="fab fa-apple"></i>
+                            <div>
+                                <span
+                                    class="download-text"
+                                    data-en="Download for"
+                                    data-tr="İndir"
+                                    >İndir</span
+                                >
+                                <span class="store-name">Mac</span>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -483,17 +640,19 @@
                 <div class="footer-content">
                     <div class="footer-brand">
                         <div class="brand-logo">
-                            <i class="fas fa-bolt"></i>
-                            <span>ZikZak AI</span>
+                            <img
+                                src="assets/z-logo.svg"
+                                alt="ZikZak AI"
+                                class="brand-logo-img"
+                            />
+                            <span>ZikZak</span>
                         </div>
                         <p
-                            data-en="Smart shopping starts here"
-                            data-tr="Akıllı alışveriş burada başlar"
+                            data-en="Smart shopping starts here."
+                            data-tr="Akıllı alışveriş burada başlar."
                         >
-                            Akıllı alışveriş burada başlar
+                            Akıllı alışveriş burada başlar.
                         </p>
-
-                        <!-- Social Links -->
                         <div class="social-links">
                             <a
                                 href="https://github.com/arrrrny/zikzak_webpage"
@@ -511,7 +670,6 @@
                             ></a>
                         </div>
                     </div>
-
                     <div class="footer-links">
                         <div class="footer-column">
                             <h4 data-en="Product" data-tr="Ürün">Ürün</h4>
@@ -542,23 +700,6 @@
                                 </li>
                             </ul>
                         </div>
-
-                        <div class="footer-column">
-                            <h4 data-en="Contact" data-tr="İletişim">
-                                İletişim
-                            </h4>
-                            <ul>
-                                <li>
-                                    <a
-                                        href="contact/"
-                                        data-en="Contact"
-                                        data-tr="İletişim"
-                                        >İletişim</a
-                                    >
-                                </li>
-                            </ul>
-                        </div>
-
                         <div class="footer-column">
                             <h4 data-en="Legal" data-tr="Yasal">Yasal</h4>
                             <ul>
@@ -580,9 +721,23 @@
                                 </li>
                             </ul>
                         </div>
+                        <div class="footer-column">
+                            <h4 data-en="Contact" data-tr="İletişim">
+                                İletişim
+                            </h4>
+                            <ul>
+                                <li>
+                                    <a
+                                        href="contact/"
+                                        data-en="Contact"
+                                        data-tr="İletişim"
+                                        >İletişim</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-
                 <div class="footer-bottom">
                     <p>
                         &copy; 2026 ZikZak AI.
@@ -592,41 +747,6 @@
                             >Tüm hakları saklıdır.</span
                         >
                     </p>
-                    <div class="footer-download">
-                        <a
-                            href="https://apps.apple.com/tr/app/zik-zak/id1563425450"
-                            class="footer-download-btn"
-                            target="_blank"
-                            rel="noopener"
-                        >
-                            <i class="fab fa-apple"></i>
-                            <span data-en="Download" data-tr="İndir"
-                                >İndir</span
-                            >
-                        </a>
-                        <a
-                            href="https://apps.apple.com/app/zik-zak/id1563425450"
-                            class="footer-download-btn"
-                            target="_blank"
-                            rel="noopener"
-                        >
-                            <i class="fab fa-apple"></i>
-                            <span data-en="Mac App Store" data-tr="Mac App Store"
-                                >Mac App Store</span
-                            >
-                        </a>
-                        <a
-                            href="https://play.google.com/store/apps/details?id=dev.zuzu.zingo"
-                            class="footer-download-btn"
-                            target="_blank"
-                            rel="noopener"
-                        >
-                            <i class="fab fa-google-play"></i>
-                            <span data-en="Download" data-tr="İndir"
-                                >İndir</span
-                            >
-                        </a>
-                    </div>
                 </div>
             </div>
         </footer>

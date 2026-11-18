@@ -1,17 +1,16 @@
 // ZikZak AI Landing Page JavaScript
+// Contract: language toggle (data-en/data-tr), mobile menu, scroll reveals,
+// smart floating download, lightweight download tracking.
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Language Management
+  // ---------- Language management ----------
   const langButtons = document.querySelectorAll(".lang-btn");
-  const elementsWithTranslation =
-    document.querySelectorAll("[data-en][data-tr]");
+  const elementsWithTranslation = document.querySelectorAll("[data-en][data-tr]");
 
   let currentLanguage = localStorage.getItem("zikzak-language") || "tr";
 
-  // Initialize language
   setLanguage(currentLanguage);
 
-  // Language button click handlers
   langButtons.forEach((btn) => {
     btn.addEventListener("click", function () {
       const selectedLang = this.getAttribute("data-lang");
@@ -23,15 +22,13 @@ document.addEventListener("DOMContentLoaded", function () {
   function setLanguage(lang) {
     currentLanguage = lang;
 
-    // Update active button
     langButtons.forEach((btn) => {
-      btn.classList.remove("active");
-      if (btn.getAttribute("data-lang") === lang) {
-        btn.classList.add("active");
-      }
+      btn.classList.toggle(
+        "active",
+        btn.getAttribute("data-lang") === lang,
+      );
     });
 
-    // Update text content and placeholders
     elementsWithTranslation.forEach((element) => {
       const text = element.getAttribute(`data-${lang}`);
       if (text) {
@@ -39,33 +36,14 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    // Update placeholders on inputs/textareas
-    document.querySelectorAll("[data-en-placeholder], [data-tr-placeholder]").forEach((element) => {
-      const placeholderAttr = `data-${lang}-placeholder`;
-      if (element.hasAttribute(placeholderAttr)) {
-        element.setAttribute("placeholder", element.getAttribute(placeholderAttr));
-      }
-    });
+    document.documentElement.lang = lang;
 
-    // Update <select> option text
-    document.querySelectorAll("select option[data-en][data-tr]").forEach((opt) => {
-      const text = opt.getAttribute(`data-${lang}`);
-      if (text) {
-        opt.textContent = text;
-      }
-    });
-
-    // Update HTML lang attribute
-    document.documentElement.lang = lang === "tr" ? "tr" : "en";
-
-    // Update page title
     const titles = {
       en: "ZikZak AI - Smart Price Comparison",
       tr: "ZikZak AI - Akıllı Fiyat Karşılaştırma",
     };
     document.title = titles[lang];
 
-    // Update meta description
     const descriptions = {
       en: "Find the best deals with AI-powered price comparison. Chat with ZikZak AI, scan barcodes, and discover amazing savings instantly.",
       tr: "AI destekli fiyat karşılaştırması ile en iyi fırsatları bulun. ZikZak AI ile sohbet edin, barkodları tarayın ve anında tasarruf keşfedin.",
@@ -76,456 +54,146 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Mobile menu functionality
+  // ---------- Mobile menu ----------
   const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
   const navLinks = document.querySelector(".nav-links");
+
+  function closeMobileMenu() {
+    navLinks.classList.remove("active");
+    mobileMenuToggle.classList.remove("active");
+    const icon = mobileMenuToggle.querySelector("i");
+    if (icon) icon.className = "fas fa-bars";
+  }
 
   mobileMenuToggle.addEventListener("click", function () {
     navLinks.classList.toggle("active");
     this.classList.toggle("active");
-
-    // Toggle hamburger/close icon
     const icon = this.querySelector("i");
-    if (this.classList.contains("active")) {
-      icon.className = "fas fa-times";
-    } else {
-      icon.className = "fas fa-bars";
+    icon.className = this.classList.contains("active")
+      ? "fas fa-times"
+      : "fas fa-bars";
+  });
+
+  navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMobileMenu);
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && navLinks.classList.contains("active")) {
+      closeMobileMenu();
     }
   });
 
-  // Close mobile menu when clicking on links
-  const navLinkItems = document.querySelectorAll(".nav-links a");
-  navLinkItems.forEach((link) => {
-    link.addEventListener("click", function () {
-      navLinks.classList.remove("active");
-      mobileMenuToggle.classList.remove("active");
-      const icon = mobileMenuToggle.querySelector("i");
-      icon.className = "fas fa-bars";
-    });
-  });
-
-  // Smooth scrolling for anchor links (exclude download buttons)
-  const anchorLinks = document.querySelectorAll(
-    'a[href^="#"]:not(.download-btn):not(.download-btn-large):not(.footer-download-btn):not(.floating-download-btn)',
-  );
-  anchorLinks.forEach((link) => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute("href").substring(1);
-      const targetElement = document.getElementById(targetId);
-
-      if (targetElement) {
-        const headerOffset = 80;
-        const elementPosition = targetElement.getBoundingClientRect().top;
+  // ---------- Smooth scrolling for anchors ----------
+  document
+    .querySelectorAll('a[href^="#"]:not(.download-btn):not(.download-btn-large)')
+    .forEach((link) => {
+      link.addEventListener("click", function (e) {
+        const href = this.getAttribute("href");
+        if (href === "#") return;
+        e.preventDefault();
+        const targetElement = document.getElementById(href.substring(1));
+        if (!targetElement) return;
+        const headerOffset = 84;
         const offsetPosition =
-          elementPosition + window.pageYOffset - headerOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
-      }
+          targetElement.getBoundingClientRect().top +
+          window.pageYOffset -
+          headerOffset;
+        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+      });
     });
-  });
 
-  // Navbar background opacity on scroll
+  // ---------- Navbar scrolled state ----------
   const navbar = document.querySelector(".navbar");
+  function updateNavbar() {
+    navbar.classList.toggle("scrolled", window.scrollY > 40);
+  }
+  window.addEventListener("scroll", updateNavbar, { passive: true });
+  updateNavbar();
 
-  window.addEventListener("scroll", function () {
-    if (window.scrollY > 50) {
-      navbar.style.background = "rgba(255, 255, 255, 0.98)";
-      navbar.style.boxShadow = "0 4px 6px -1px rgb(0 0 0 / 0.1)";
-    } else {
-      navbar.style.background = "rgba(255, 255, 255, 0.95)";
-      navbar.style.boxShadow = "none";
-    }
-  });
-
-  // Floating download button visibility
+  // ---------- Floating download button (mobile only) ----------
   const floatingDownload = document.querySelector(".floating-download");
   const downloadSection = document.querySelector("#download");
 
-  window.addEventListener("scroll", function () {
-    if (window.innerWidth <= 768) {
-      const downloadSectionTop = downloadSection.getBoundingClientRect().top;
-      if (downloadSectionTop > window.innerHeight) {
-        floatingDownload.style.display = "block";
-      } else {
-        floatingDownload.style.display = "none";
-      }
-    }
-  });
-
-  // Animate elements on scroll
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
-  };
-
-  const observer = new IntersectionObserver(function (entries) {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = "1";
-        entry.target.style.transform = "translateY(0)";
-      }
-    });
-  }, observerOptions);
-
-  // Elements to animate
-  const animateElements = document.querySelectorAll(
-    ".feature-card, .step, .download-btn-large",
-  );
-  animateElements.forEach((el) => {
-    el.style.opacity = "0";
-    el.style.transform = "translateY(30px)";
-    el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-    observer.observe(el);
-  });
-
-  // Download button analytics tracking (lightweight - no interference)
-  const downloadButtons = document.querySelectorAll(
-    ".download-btn, .download-btn-large, .footer-download-btn, .floating-download-btn",
-  );
-
-  downloadButtons.forEach((btn) => {
-    btn.addEventListener(
-      "click",
-      function (e) {
-        // Track analytics without interfering with navigation
-        const platform =
-          this.classList.contains("ios") || this.href.includes("apple")
-            ? "iOS"
-            : "Android";
-        const location = this.closest(".hero")
-          ? "Hero"
-          : this.closest(".download-section")
-            ? "Download Section"
-            : this.closest(".footer")
-              ? "Footer"
-              : this.classList.contains("floating-download-btn")
-                ? "Floating Button"
-                : "Unknown";
-
-        // Track download attempt (non-blocking)
-        if (typeof gtag !== "undefined") {
-          gtag("event", "download_click", {
-            platform: platform,
-            location: location,
-            language: currentLanguage,
-          });
-        }
-
-        // Ensure link opens in new tab
-        if (!this.target) {
-          this.target = "_blank";
-          this.rel = "noopener noreferrer";
-        }
-      },
-      { passive: true },
+  function updateFloatingDownload() {
+    if (window.innerWidth > 768) return;
+    const sectionTop = downloadSection.getBoundingClientRect().top;
+    floatingDownload.classList.toggle(
+      "visible",
+      sectionTop > window.innerHeight,
     );
-  });
-
-  // Phone mockup interaction
-  const phoneMockup = document.querySelector(".phone-mockup");
-  if (phoneMockup) {
-    phoneMockup.addEventListener("mouseenter", function () {
-      this.style.transform = "rotate(0deg) scale(1.02)";
-    });
-
-    phoneMockup.addEventListener("mouseleave", function () {
-      this.style.transform = "rotate(5deg) scale(1)";
-    });
   }
+  window.addEventListener("scroll", updateFloatingDownload, { passive: true });
+  window.addEventListener("resize", updateFloatingDownload);
+  updateFloatingDownload();
 
-  // Chat simulation in phone mockup
-  function simulateChat() {
-    const chatMessages = document.querySelector(".chat-messages");
-    if (!chatMessages) return;
-
-    const messages = [
-      {
-        type: "user",
-        en: "Find me the best iPhone deals",
-        tr: "En iyi iPhone fırsatlarını bul",
-      },
-      {
-        type: "ai",
-        en: "Found 12 amazing deals for you!",
-        tr: "Sizin için 12 harika fırsat buldum!",
-      },
-      { type: "user", en: "Show cheapest", tr: "En ucuzunu göster" },
-      {
-        type: "ai",
-        en: "₺24,999 - 15% OFF at TechStore",
-        tr: "₺24,999 - TechStore'da %15 İndirim",
-      },
-    ];
-
-    let currentMessageIndex = 0;
-
-    function addMessage() {
-      if (currentMessageIndex >= messages.length) {
-        currentMessageIndex = 0;
-        setTimeout(() => {
-          chatMessages.innerHTML = `
-                        <div class="message ai">
-                            <span data-en="I found 5 amazing deals for iPhone 15!" data-tr="iPhone 15 için 5 harika fırsat buldum!">
-                                ${currentLanguage === "tr" ? "iPhone 15 için 5 harika fırsat buldum!" : "I found 5 amazing deals for iPhone 15!"}
-                            </span>
-                        </div>
-                        <div class="message user">
-                            <span data-en="Show me the cheapest" data-tr="En ucuzunu göster">
-                                ${currentLanguage === "tr" ? "En ucuzunu göster" : "Show me the cheapest"}
-                            </span>
-                        </div>
-                        <div class="message ai">
-                            <div class="deal-card">
-                                <span class="price">₺24,999</span>
-                                <span class="discount">15% OFF</span>
-                            </div>
-                        </div>
-                    `;
-          setTimeout(addMessage, 3000);
-        }, 1000);
-        return;
-      }
-
-      const message = messages[currentMessageIndex];
-      const messageEl = document.createElement("div");
-      messageEl.className = `message ${message.type}`;
-      messageEl.innerHTML = `<span>${message[currentLanguage]}</span>`;
-
-      chatMessages.appendChild(messageEl);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-
-      currentMessageIndex++;
-      setTimeout(addMessage, 2000);
-    }
-
-    // Start simulation after a delay
-    setTimeout(addMessage, 5000);
-  }
-
-  // Start chat simulation if on desktop
-  if (window.innerWidth > 768) {
-    simulateChat();
-  }
-
-  // Keyboard navigation support
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") {
-      // Close mobile menu if open
-      if (navLinks.classList.contains("active")) {
-        navLinks.classList.remove("active");
-        mobileMenuToggle.classList.remove("active");
-        const icon = mobileMenuToggle.querySelector("i");
-        icon.className = "fas fa-bars";
-      }
-    }
-  });
-
-  // Preload images for better performance
-  const imagesToPreload = ["/og-image.png", "/favicon.ico"];
-
-  imagesToPreload.forEach((src) => {
-    const img = new Image();
-    img.src = src;
-  });
-
-  // Error handling for download links
-  window.addEventListener("error", function (e) {
-    console.error("Landing page error:", e.error);
-
-    // Track errors if analytics is available
-    if (typeof gtag !== "undefined") {
-      gtag("event", "exception", {
-        description: e.error?.message || "Unknown error",
-        fatal: false,
-      });
-    }
-  });
-
-  // Performance monitoring
-  window.addEventListener("load", function () {
-    if (typeof gtag !== "undefined") {
-      gtag("event", "page_load_time", {
-        value: Math.round(performance.now()),
-      });
-    }
-  });
-
-  // Resize handler for responsive adjustments
-  window.addEventListener("resize", function () {
-    // Hide floating download on desktop
-    if (window.innerWidth > 768) {
-      floatingDownload.style.display = "none";
-    }
-
-    // Reset phone mockup transform on mobile
-    if (window.innerWidth <= 768 && phoneMockup) {
-      phoneMockup.style.transform = "none";
-    }
-  });
-
-  // Initialize tooltips or additional interactive elements
-  function initializeInteractivity() {
-    // Add hover effects to statistics
-    const stats = document.querySelectorAll(".stat");
-    stats.forEach((stat) => {
-      stat.addEventListener("mouseenter", function () {
-        this.style.transform = "scale(1.1)";
-      });
-
-      stat.addEventListener("mouseleave", function () {
-        this.style.transform = "scale(1)";
-      });
-    });
-
-    // Add click animation to feature cards
-    const featureCards = document.querySelectorAll(".feature-card");
-    featureCards.forEach((card) => {
-      card.addEventListener("click", function () {
-        this.style.transform = "scale(0.98)";
-        setTimeout(() => {
-          this.style.transform = "translateY(-5px)";
-        }, 150);
-      });
-    });
-  }
-
-  // Initialize all interactive features
-  initializeInteractivity();
-
-  // Console branding
-  console.log(`
-    🔥 ZikZak AI Landing Page
-    ⚡ Smart Price Comparison
-    🛍️ Built with modern web technologies
-
-    Interested in joining our team?
-    Contact us: careers@zik-zak.zuzu.dev
-    `);
-});
-
-// Service Worker registration for PWA features (optional)
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function () {
-    navigator.serviceWorker
-      .register("/sw.js")
-      .then(function (registration) {
-        console.log("SW registered: ", registration);
-      })
-      .catch(function (registrationError) {
-        console.log("SW registration failed: ", registrationError);
-      });
-  });
-}
-
-// Smart Download Detection
-function initSmartDownload() {
+  // Smart OS detection for the floating button
   const floatingBtn = document.querySelector(".floating-download-btn");
-  const downloadBtns = document.querySelectorAll(
-    ".download-btn, .download-btn-large",
+  if (floatingBtn) {
+    const isAndroid = /Android/.test(navigator.userAgent);
+    floatingBtn.href = isAndroid
+      ? "https://play.google.com/store/apps/details?id=dev.zuzu.zingo"
+      : "https://apps.apple.com/tr/app/zik-zak/id1563425450";
+  }
+
+  // ---------- Reveal on scroll ----------
+  const revealObserver = new IntersectionObserver(
+    function (entries) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
   );
 
-  if (!floatingBtn) return;
+  document.querySelectorAll(".reveal").forEach((el) => {
+    revealObserver.observe(el);
+  });
 
-  // Detect user's device
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-  const isAndroid = /Android/.test(navigator.userAgent);
-
-  // App store URLs
-  const iosUrl = "https://apps.apple.com/tr/app/zik-zak/id1563425450";
-  const androidUrl =
-    "https://play.google.com/store/apps/details?id=dev.zuzu.zingo";
-
-  // Update floating button based on device
-  if (isAndroid) {
-    floatingBtn.href = androidUrl;
-    floatingBtn.innerHTML = `
-      <i class="fab fa-google-play"></i>
-      <span data-en="Get on Play Store" data-tr="Play Store'dan İndir">Play Store'dan İndir</span>
-    `;
-  } else {
-    // Default to iOS (including desktop users)
-    floatingBtn.href = iosUrl;
-    floatingBtn.innerHTML = `
-      <i class="fab fa-apple"></i>
-      <span data-en="Get on App Store" data-tr="App Store'dan İndir">App Store'dan İndir</span>
-    `;
-  }
-
-  // Apply language to new content
-  const currentLanguage = localStorage.getItem("zikzak-language") || "tr";
-  const newSpan = floatingBtn.querySelector("span");
-  if (newSpan) {
-    const text = newSpan.getAttribute(`data-${currentLanguage}`);
-    if (text) {
-      newSpan.textContent = text;
-    }
-  }
-}
-
-// Download Analytics Tracking
-function trackDownload(platform, location) {
-  // Track download events for analytics
-  console.log(`Download tracked: ${platform} from ${location}`);
-
-  // Google Analytics 4 (if implemented)
-  if (typeof gtag !== "undefined") {
-    gtag("event", "download_app", {
-      platform: platform,
-      location: location,
-      app_name: "ZikZak AI",
-    });
-  }
-
-  // Alternative analytics (Plausible, etc.)
-  if (typeof plausible !== "undefined") {
-    plausible("Download", {
-      props: {
+  // ---------- Download tracking (non-blocking) ----------
+  function trackDownload(platform, location) {
+    if (typeof gtag !== "undefined") {
+      gtag("event", "download_click", {
         platform: platform,
         location: location,
-      },
-    });
+      });
+    }
+    if (typeof plausible !== "undefined") {
+      plausible("Download", {
+        props: { platform: platform, location: location },
+      });
+    }
   }
-}
 
-// Add download tracking to all download buttons
-function initDownloadTracking() {
-  // Track main download buttons (consolidated tracking - remove duplicate listeners)
   document
     .querySelectorAll(
-      ".download-btn, .download-btn-large, .footer-download-btn, .floating-download-btn",
+      ".download-btn, .download-btn-large, .floating-download-btn",
     )
     .forEach((btn) => {
-      // Remove any existing listeners to avoid conflicts
-      btn.removeEventListener("click", trackDownload);
-
-      btn.addEventListener("click", () => {
-        const platform = btn.href.includes("apple.com") ? "iOS" : "Android";
-        const location = btn.classList.contains("floating-download-btn")
-          ? "floating-button"
-          : btn.classList.contains("footer-download-btn")
-            ? "footer"
-            : "main-buttons";
-
-        trackDownload(platform, location);
-      });
+      btn.addEventListener(
+        "click",
+        () => {
+          const platform = btn.href.includes("apple.com") ? "iOS" : "Android";
+          const location = btn.classList.contains("floating-download-btn")
+            ? "floating"
+            : btn.closest(".download-section")
+              ? "download-section"
+              : btn.closest(".hero")
+                ? "hero"
+                : "unknown";
+          trackDownload(platform, location);
+        },
+        { passive: true },
+      );
     });
-}
 
-// Initialize smart download when DOM is loaded
-document.addEventListener("DOMContentLoaded", function () {
-  initSmartDownload();
-  initDownloadTracking();
+  // ---------- Console branding ----------
+  console.log(
+    "%cZikZak AI%c zuzu.dev — never overpay again.",
+    "background:#ff5722;color:#fff;padding:4px 10px;border-radius:4px;font-weight:bold",
+    "color:#ff5722;padding:4px 6px",
+  );
 });
-
-// Export functions for testing (if needed)
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = {
-    setLanguage,
-    simulateChat,
-    initSmartDownload,
-  };
-}
