@@ -7,7 +7,21 @@ document.addEventListener("DOMContentLoaded", function () {
   const langButtons = document.querySelectorAll(".lang-btn");
   const elementsWithTranslation = document.querySelectorAll("[data-en][data-tr]");
 
-  let currentLanguage = localStorage.getItem("zikzak-language") || "tr";
+  const urlLang = new URLSearchParams(window.location.search).get("lang");
+  const storedLang = localStorage.getItem("zikzak-language");
+  const browserLang =
+    (navigator.language || "tr").toLowerCase().indexOf("tr") === 0
+      ? "tr"
+      : "en";
+  let currentLanguage =
+    urlLang === "en" || urlLang === "tr"
+      ? urlLang
+      : storedLang === "en" || storedLang === "tr"
+        ? storedLang
+        : browserLang;
+  if (urlLang === "en" || urlLang === "tr") {
+    localStorage.setItem("zikzak-language", urlLang);
+  }
 
   setLanguage(currentLanguage);
 
@@ -133,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const isAndroid = /Android/.test(navigator.userAgent);
     floatingBtn.href = isAndroid
       ? "https://play.google.com/store/apps/details?id=dev.zuzu.zingo"
-      : "https://apps.apple.com/tr/app/zik-zak/id1563425450";
+      : "https://apps.apple.com/app/zik-zak/id1563425450";
   }
 
   // ---------- Reveal on scroll ----------
